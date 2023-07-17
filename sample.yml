@@ -1,0 +1,7 @@
+---
+- name: sample book
+  hosts: all
+  become: true
+  tasks:
+          - name: Run
+            shell: "docker-compose up"
