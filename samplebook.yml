@@ -32,10 +32,16 @@
                     dest: /usr/local/bin/docker-compose
                     mode: 'u+x,g+x'
 
+          - name: copy Docker Compose db
+            copy:
+                    src: /var/lib/jenkins/workspace/Docker-Flask/db
+                    dest: /home/ubuntu/
+                    
           - name: copy Docker Compose files
             copy:
                     src: /var/lib/jenkins/workspace/Docker-Flask/docker-compose.yml
                     dest: /home/ubuntu/
+                              
 
           - name: Run
             become: true
