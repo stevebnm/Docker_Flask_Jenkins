@@ -38,6 +38,7 @@
                     dest: /home/ubuntu/
 
           - name: Run
+            become: true
             args:
                     chdir: /home/ubuntu/
             shell: "docker-compose up -d"
