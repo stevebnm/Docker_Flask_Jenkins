@@ -34,7 +34,12 @@
 
           - name: copy Docker Compose files
             copy:
-                    src: ~/docker-compose.yml
-                    dest: ./home/ubuntu/
+                    src: /var/lib/jenkins/workspace/Docker-Flask/docker-compose.yml
+                    dest: /home/ubuntu/
+
+          - name: Run
+            args:
+                    chdir: /home/ubuntu/
+            shell: "docker-compose up -d"
 
          
