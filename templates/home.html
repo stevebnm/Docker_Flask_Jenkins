@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans&display=swap" rel="stylesheet">
+        <style>
+
+            *{
+
+                font-family: 'Roboto', sans-serif;
+            }
+            .title{
+                text-align: center;
+                color: #0000e6;
+                padding: 40px;
+                font-weight: bold;
+            }
+            .home{
+
+                padding: 100px;
+            }
+            .card{
+                border: none;
+                margin: 20px;
+            }
+            .card:hover{
+                border: 2px solid #0000ff;
+            }
+            .card-title{
+                padding-left: 35px;
+                color: #0000ff;
+            }
+            ol li{
+                list-style-type: none;
+            }
+            .data{
+                color: grey;
+                font-size: 20px;
+            }
+            .add{
+                color: green;
+                padding: 10px;
+                margin: 10px;
+                font-size: 20px;
+            }
+            .add:hover{
+                background-color: green;
+                color: white;
+            }
+            .sub-title{
+                border: 2px solid #000080;
+                padding: 12px;
+                color: #0000b3;
+                text-align: center;
+            }
+            .submit{
+                background-color: green;
+                color: white;
+            }
+            .modal{
+                color: green;
+            }
+            .delete{
+                font-size: 15px;
+                color: red;
+                text-decoration: underline;
+                border: none;
+                padding: 0;
+                background-color: white;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1 class="title shadow-sm">Employee Management System</h1>
+
+        <div class="home">
+
+            <div class="container">
+                <div class="container">
+                    <h1 class="sub-title shadow">Employee Details</h1>
+                </div>
+                <div class="row">
+                    {% for employee in allEmployees %}
+                        <div class="col-sm-4">
+                            <div class="card shadow rounded">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{employee[1]}}</h3>
+                                    <hr>
+                                    <div class="data">
+                                        <ol>
+                                            <li class="info">Job: {{employee[2]}}</li>
+                                            <li class="info">Salary: {{employee[3]}}</li>
+                                            <form method="POST" action="/delete">
+                                                <input type="hidden" name="id" value={{employee[0]}}>
+                                                <button type="submit" class="delete">Delete</button>
+                                            </form>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="container">
+                        <button type="button" class="add btn shadow" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="@mdo">ADD EMPLOYEE</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Add Employee To Employee Database</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form method="POST" action="/home">
+                                        <div class="form-group">
+                                          <label for="recipient-name" class="col-form-label">Name</label>
+                                          <input type="text" class="form-control" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Job</label>
+                                            <input type="text" class="form-control" name="job">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Salary</label>
+                                            <input type="text" class="form-control" name="salary">
+                                        </div>
+                                        <button type="submit" class="btn submit" >Submit</button>
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
