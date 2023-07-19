@@ -47,6 +47,9 @@
             become: true
             args:
                     chdir: /home/ubuntu/
-            shell: "docker-compose up -d"
+            shell: "{{ item }}"
+            with_items:
+                    - docker-compose down
+                    - docker-compose up -d
 
          
